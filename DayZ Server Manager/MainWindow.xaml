@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Name="ServerModsStage" Grid.ColumnSpan="1">
+            <TextBlock>Server Mods</TextBlock>
+        </StackPanel>
+        <StackPanel Name="ClientModsStage" Grid.Column="1">
+            <TextBlock>Client Mods</TextBlock>
+        </StackPanel>
     </Grid>
 </Window>

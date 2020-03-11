@@ -1,0 +1,28 @@
+﻿<Window x:Class="DayZ_Server_Manager.ConfigPaths"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DayZ_Server_Manager"
+        mc:Ignorable="d"
+        SizeToContent="WidthAndHeight"
+        Title="ConfigPaths" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="382*"/>
+            <RowDefinition Height="37*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Name="fields" Grid.RowSpan="1" Margin="5 10 5 15" MinWidth="500">
+            <TextBlock Style="{StaticResource DiagLabel}">Server</TextBlock>
+            <TextBox Name="ServerInput" TextChanged="Input_TextChanged"></TextBox>
+            <TextBlock Style="{StaticResource DiagLabel}">Profile</TextBlock>
+            <TextBox Name="ProfileInput" TextChanged="Input_TextChanged"></TextBox>
+            <TextBlock Style="{StaticResource DiagLabel}">Workshop</TextBlock>
+            <TextBox Name="WorkshopInput" TextChanged="Input_TextChanged"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 5" FlowDirection="RightToLeft" Grid.Row="1">
+            <Button Name="Ok" Style="{StaticResource DiagBtn}" Click="Ok_Click">OK</Button>
+            <Button Name="Cancel" Style="{StaticResource DiagBtn}" Click="Cancel_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>
