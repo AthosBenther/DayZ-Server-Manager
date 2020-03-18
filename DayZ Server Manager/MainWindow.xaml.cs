@@ -49,5 +49,11 @@ namespace DayZ_Server_Manager
             Window cfg = new ConfigPaths();
             cfg.ShowDialog();
         }
+
+        private void ModManagerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window MMan = new ModManager();
+            MMan.ShowDialog();
+        }
     }
 }

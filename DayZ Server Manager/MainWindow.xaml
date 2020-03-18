@@ -16,10 +16,10 @@
             <TextBlock>alala</TextBlock>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Style="{StaticResource DiagBtn}">Close</Button>
             <Button Style="{StaticResource DiagBtn}" Name="ServerCfgBtn" Click="ServerCfgBtn_Click">Server Configuration</Button>
             <Button Style="{StaticResource DiagBtn}" Name="PathsCfgBtn" Click="PathsCfgBtn_Click">Paths Configuration</Button>
-            <Button Style="{StaticResource DiagBtn}">Start Server</Button>
+            <Button Style="{StaticResource DiagBtn}" Name="ModManagerBtn" Click="ModManagerBtn_Click">Mod Manager</Button>
+            <Button Style="{StaticResource DiagBtn}" IsEnabled="False">Start Server</Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -136,7 +136,7 @@ namespace DayZ_Server_Manager
 
         private void port_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
         }
 
         private void port_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -221,6 +221,9 @@ namespace DayZ_Server_Manager
                         break;
                     case "timeStampFormat":
                         cfg += (Config.Default["timeStampFormat"] == "true") ? "timeStampFormat = Full" : "timeStampFormat = Short";
+                        break;
+                    case "hostname":
+                        cfg += "\"" + Config.Default.hostname + "\"";
                         break;
                     case "template":
                         break;
