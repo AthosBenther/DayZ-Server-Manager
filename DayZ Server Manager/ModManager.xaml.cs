@@ -1,18 +1,51 @@
-﻿using DayZ_Server_Manager.Properties;
+﻿using DayZ_Server_Manager.Controls;
+using DayZ_Server_Manager.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace DayZ_Server_Manager
 {
-    public static class ModManager
+    /// <summary>
+    /// Interaction logic for ModManager.xaml
+    /// </summary>
+    public partial class ModManager : Window
     {
         public static List<Mod> ServerMods => GetMods(Settings.Default.DIR_Server);
         public static List<Mod> ClientMods => GetMods(Settings.Default.DIR_Workshop);
 
+        public ModManager()
+        {
+            InitializeComponent();
+
+            if (!DataManager.IsValidInstall)
+            {
+                Window cfg = new ConfigPaths();
+                cfg.ShowDialog();
+            }
+
+            foreach (Mod mod in ModManager.ServerMods)
+            {
+                ServerModsStage.Children.Add(new ModControl(mod));
+            }
+
+            foreach (Mod mod in ModManager.ClientMods)
+            {
+                ClientModsStage.Children.Add(new ModControl(mod));
+            }
+
+        }
         private static List<Mod> GetMods(string Folder)
         {
             List<Mod> Mods = new List<Mod>();
@@ -65,3 +98,4 @@ namespace DayZ_Server_Manager
         }
     }
 }
+

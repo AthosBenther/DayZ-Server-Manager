@@ -5,9 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DayZ_Server_Manager"
         mc:Ignorable="d"
-        Title="ServerCfg" Height="700" Width="500">
+        Title="ServerCfg" SizeToContent="Width" Height="500">
     <Grid>
         <TabControl Name="CfgStage">
+            <TabItem Name="starparams" Header="Start Parameters">
+                <StackPanel Margin="5 10">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource DiagLabel}">Server Port</TextBlock>
+                        <TextBox Name="port" TextChanged="port_TextChanged" KeyDown="port_KeyDown"></TextBox>
+                    </StackPanel>
+                    <StackPanel  Margin="0 10 0 0">
+                        <TextBlock Style="{StaticResource DiagLabel}">Server CPU count</TextBlock>
+                        <Slider Name="cpucount" Minimum="1" Maximum="12" Value="6" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                    <StackPanel Margin="0 10 0 0">
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="doLogs">doLogs</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="adminLog">adminLog</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="netLog">netLog</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="freezeCheck">freezeCheck</CheckBox>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
             <TabItem Header="Server Information">
                 <StackPanel Margin="5 10">
                     <StackPanel ToolTip="Server name">

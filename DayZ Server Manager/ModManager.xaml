@@ -1,25 +1,27 @@
-﻿<Window x:Class="DayZ_Server_Manager.MainWindow"
+﻿<Window x:Class="DayZ_Server_Manager.ModManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DayZ_Server_Manager"
         mc:Ignorable="d"
-        WindowStyle="ToolWindow"
-        Title="DayZ Server Manager" SizeToContent="WidthAndHeight">
+        Title="ModManager" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="370*"/>
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <TextBlock>alala</TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Name="ServerModsStage" Grid.ColumnSpan="1">
+            <TextBlock>Server Mods</TextBlock>
+        </StackPanel>
+        <StackPanel Name="ClientModsStage" Grid.Column="1">
+            <TextBlock>Client Mods</TextBlock>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Style="{StaticResource DiagBtn}">Close</Button>
-            <Button Style="{StaticResource DiagBtn}" Name="ServerCfgBtn" Click="ServerCfgBtn_Click">Server Configuration</Button>
-            <Button Style="{StaticResource DiagBtn}" Name="PathsCfgBtn" Click="PathsCfgBtn_Click">Paths Configuration</Button>
-            <Button Style="{StaticResource DiagBtn}">Start Server</Button>
         </StackPanel>
     </Grid>
 </Window>

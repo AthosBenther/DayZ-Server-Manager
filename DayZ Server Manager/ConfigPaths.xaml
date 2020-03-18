@@ -19,6 +19,24 @@
             <TextBox Name="ProfileInput" TextChanged="Input_TextChanged"></TextBox>
             <TextBlock Style="{StaticResource DiagLabel}">Workshop</TextBlock>
             <TextBox Name="WorkshopInput" TextChanged="Input_TextChanged"></TextBox>
+            <TextBlock Style="{StaticResource DiagLabel}">Dayz Server Executable</TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="ServerEXE" TextChanged="Input_TextChanged_File" Grid.ColumnSpan="1"></TextBox>
+                <Button Grid.ColumnSpan="1" Grid.Column="1" Name="ServerFind" Click="ServerFind_Click">...</Button>
+            </Grid>
+            <TextBlock Style="{StaticResource DiagLabel}">DZSA Executable</TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="DZSAEXE" TextChanged="Input_TextChanged_File_DZSA"></TextBox>
+                <Button Grid.ColumnSpan="1" Grid.Column="1" Name="DZSAFind" Click="DZSAFind_Click">...</Button>
+            </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0 5" FlowDirection="RightToLeft" Grid.Row="1">
             <Button Name="Ok" Style="{StaticResource DiagBtn}" Click="Ok_Click">OK</Button>

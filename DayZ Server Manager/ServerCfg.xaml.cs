@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace DayZ_Server_Manager
 {
@@ -25,14 +26,57 @@ namespace DayZ_Server_Manager
         private void ServerCfg_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Config.Default.Save();
+            StartParams.Default.Save();
             GenConfigFile();
         }
 
         private void ServerCfg_Loaded(object sender, RoutedEventArgs e)
         {
+            LoadParams();
+            LoadCfgs();
+            SetMissions();
+
+        }
+
+        private void LoadParams()
+        {
+            TabItem Item = CfgStage.Items[0] as TabItem;
+
+            StackPanel Stacks = Item.Content as StackPanel;
+
+            Stacks.Children.OfType<StackPanel>().ToList().ForEach(s =>
+            {
+                s.Children.OfType<TextBox>().ToList().ForEach(p =>
+                {
+                    if (p.Name != "port")
+                    {
+                        p.Text = StartParams.Default[p.Name] as string;
+                        p.TextChanged += P_TextChanged;
+                    }
+                    else
+                    {
+                        p.Text = StartParams.Default.port.ToString();
+                    }
+                });
+
+                s.Children.OfType<CheckBox>().ToList().ForEach(p =>
+                {
+                    p.IsChecked = (StartParams.Default[p.Name] as bool?) == true;
+                    p.Click += P_Click;
+                });
+                s.Children.OfType<Slider>().ToList().ForEach(p =>
+                {
+                    p.Value = (double)(StartParams.Default[p.Name] as int?);
+                    p.ValueChanged += P_ValueChanged;
+                });
+            });
+        }
+
+        private void LoadCfgs()
+        {
             int items = CfgStage.Items.Count;
 
-            for (int i = 0; i < items; i++)
+            for (int i = 1; i < items; i++)
             {
                 TabItem Item = CfgStage.Items[i] as TabItem;
 
@@ -44,6 +88,7 @@ namespace DayZ_Server_Manager
                     s.Children.OfType<TextBox>().ToList().ForEach(c =>
                     {
                         c.Text = Config.Default[c.Name] as string;
+
                         c.TextChanged += C_TextChanged;
                     });
                     s.Children.OfType<CheckBox>().ToList().ForEach(c =>
@@ -59,9 +104,6 @@ namespace DayZ_Server_Manager
                 });
 
             }
-
-            SetMissions();
-
         }
 
         private void SetMissions()
@@ -84,6 +126,50 @@ namespace DayZ_Server_Manager
                 template.SelectedIndex = 0;
             }
         }
+
+        private void P_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox p = sender as TextBox;
+
+            StartParams.Default[p.Name] = p.Text;
+        }
+
+        private void port_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void port_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            try
+            {
+                port.BorderBrush = Brushes.Black;
+                port.Background = Brushes.Transparent;
+                int p = int.Parse(port.Text);
+                StartParams.Default.port = p;
+            }
+            catch (Exception ex)
+            {
+                port.BorderBrush = Brushes.Red;
+                port.Background = Brushes.LightPink;
+                port.ToolTip = ex.Message;
+            }
+        }
+
+        private void P_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Slider p = sender as Slider;
+
+            StartParams.Default[p.Name] = (int)p.Value;
+        }
+
+        private void P_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox p = sender as CheckBox;
+
+            StartParams.Default[p.Name] = p.IsChecked == true;
+        }
+
 
         private void C_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {

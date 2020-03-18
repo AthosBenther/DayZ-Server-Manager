@@ -58,6 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ModManager.xaml.cs">
+      <DependentUpon>ModManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\StartParams.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>StartParams.settings</DependentUpon>
+    </Compile>
     <Compile Include="ServerCfg.xaml.cs">
       <DependentUpon>ServerCfg.xaml</DependentUpon>
     </Compile>
@@ -89,13 +97,16 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ModManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ServerCfg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -126,6 +137,10 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\StartParams.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>StartParams.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

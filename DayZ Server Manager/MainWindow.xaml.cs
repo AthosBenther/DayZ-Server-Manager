@@ -36,23 +36,18 @@ namespace DayZ_Server_Manager
                 Window cfg = new ConfigPaths();
                 cfg.ShowDialog();
             }
-
-            foreach (Mod mod in ModManager.ServerMods)
-            {
-                ServerModsStage.Children.Add(new ModControl(mod));
-            }
-
-            foreach (Mod mod in ModManager.ClientMods)
-            {
-                ClientModsStage.Children.Add(new ModControl(mod));
-            }
-
         }
 
         private void ServerCfgBtn_Click(object sender, RoutedEventArgs e)
         {
             Window SvCfg = new ServerCfg();
             SvCfg.ShowDialog();
+        }
+
+        private void PathsCfgBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window cfg = new ConfigPaths();
+            cfg.ShowDialog();
         }
     }
 }

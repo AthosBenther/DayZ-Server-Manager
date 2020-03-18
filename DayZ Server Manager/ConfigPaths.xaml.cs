@@ -1,4 +1,5 @@
 ﻿using DayZ_Server_Manager.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,6 +35,12 @@ namespace DayZ_Server_Manager
             ProfileInput.Text = Settings.Default.DIR_Profile;
             ProfileInput.BorderBrush = Directory.Exists(Settings.Default.DIR_Profile) ? Brushes.Black : Brushes.Red;
 
+            ServerEXE.Text = Settings.Default.EXE_DayzServer;
+            ProfileInput.BorderBrush = File.Exists(Settings.Default.DIR_Profile + "\\" + Settings.Default.EXE_DayzServer) ? Brushes.Black : Brushes.Red;
+
+            DZSAEXE.Text = Settings.Default.EXE_DZSA;
+            ProfileInput.BorderBrush = Directory.Exists(Settings.Default.DIR_Profile + "\\" + Settings.Default.EXE_DZSA) ? Brushes.Black : Brushes.Red;
+
 
             ValidateOK();
         }
@@ -50,10 +57,68 @@ namespace DayZ_Server_Manager
 
             ValidateOK();
         }
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.DIR_Profile = ProfileInput.Text;
+            Settings.Default.DIR_Workshop = WorkshopInput.Text;
+            Settings.Default.DIR_Server = ServerInput.Text;
+            Settings.Default.EXE_DayzServer = ServerEXE.Text;
+            Settings.Default.EXE_DZSA = DZSAEXE.Text;
+            Settings.Default.FirstRun = false;
+
+            Settings.Default.Save();
+            this.Close();
+        }
+
+        private void ServerFind_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog a = new OpenFileDialog();
+            a.InitialDirectory = Settings.Default.DIR_Server;
+            a.Filter = "Dayz Server Executable (*.exe) | *.exe";
+            a.FileOk += (x, y) =>
+            {
+                ServerEXE.Text = a.SafeFileName;
+            };
+            a.ShowDialog();
+        }
+
+        private void DZSAFind_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog a = new OpenFileDialog();
+            a.InitialDirectory = Settings.Default.DIR_Server;
+            a.Filter = "DZSA Server Executable (*.exe) | *.exe";
+            a.FileOk += (x, y) =>
+            {
+                DZSAEXE.Text = a.SafeFileName;
+            };
+            a.ShowDialog();
+        }
+
+        private void Input_TextChanged_File(object sender, TextChangedEventArgs e)
+        {
+            TextBox input = sender as TextBox;
+            input.BorderBrush = File.Exists(Settings.Default.DIR_Server + "\\" + input.Text) ? Brushes.Black : Brushes.Red;
+
+            ValidateOK();
+        }
+        private void Input_TextChanged_File_DZSA(object sender, TextChangedEventArgs e)
+        {
+            TextBox input = sender as TextBox;
+            if (!string.IsNullOrWhiteSpace(input.Text))
+            {
+                input.BorderBrush = File.Exists(Settings.Default.DIR_Server + "\\" + input.Text) ? Brushes.Black : Brushes.Red;
+            }
+            else
+            {
+                input.BorderBrush = Brushes.Black;
+            }
+
+            ValidateOK();
+        }
 
         private void ValidateOK()
         {
-            if(fields.Children.OfType<TextBox>().Any<TextBox>(t => t.BorderBrush == Brushes.Red))
+            if (fields.Children.OfType<TextBox>().Any<TextBox>(t => t.BorderBrush == Brushes.Red))
             {
                 Ok.IsEnabled = false;
             }
@@ -61,17 +126,6 @@ namespace DayZ_Server_Manager
             {
                 Ok.IsEnabled = true;
             }
-        }
-
-        private void Ok_Click(object sender, RoutedEventArgs e)
-        {
-            Settings.Default.DIR_Profile = ProfileInput.Text;
-            Settings.Default.DIR_Workshop = WorkshopInput.Text;
-            Settings.Default.DIR_Server = ServerInput.Text;
-            Settings.Default.FirstRun = false;
-
-            Settings.Default.Save();
-            this.Close();
         }
     }
 }

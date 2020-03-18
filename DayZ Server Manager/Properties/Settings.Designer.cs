@@ -70,5 +70,29 @@ namespace DayZ_Server_Manager.Properties {
                 this["FirstRun"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string EXE_DayzServer {
+            get {
+                return ((string)(this["EXE_DayzServer"]));
+            }
+            set {
+                this["EXE_DayzServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string EXE_DZSA {
+            get {
+                return ((string)(this["EXE_DZSA"]));
+            }
+            set {
+                this["EXE_DZSA"] = value;
+            }
+        }
     }
 }
