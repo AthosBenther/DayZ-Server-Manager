@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.IO;
 using DayZ_Server_Manager.Properties;
 using static DayZ_Server_Manager.ModManager;
+using DayZ_Server_Manager.Controls;
 
 namespace DayZ_Server_Manager
 {
@@ -38,11 +39,20 @@ namespace DayZ_Server_Manager
 
             foreach (Mod mod in ModManager.ServerMods)
             {
-                TextBlock modtxt = new TextBlock();
-                modtxt.Text = mod.Name;
-                ServerModsStage.Children.Add(modtxt);
+                ServerModsStage.Children.Add(new ModControl(mod));
             }
 
+            foreach (Mod mod in ModManager.ClientMods)
+            {
+                ClientModsStage.Children.Add(new ModControl(mod));
+            }
+
+        }
+
+        private void ServerCfgBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window SvCfg = new ServerCfg();
+            SvCfg.ShowDialog();
         }
     }
 }

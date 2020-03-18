@@ -1,0 +1,137 @@
+﻿<Window x:Class="DayZ_Server_Manager.ServerCfg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DayZ_Server_Manager"
+        mc:Ignorable="d"
+        Title="ServerCfg" Height="700" Width="500">
+    <Grid>
+        <TabControl Name="CfgStage">
+            <TabItem Header="Server Information">
+                <StackPanel Margin="5 10">
+                    <StackPanel ToolTip="Server name">
+                        <TextBlock Style="{StaticResource DiagLabel}">Name</TextBlock>
+                        <TextBox Name="hostname"></TextBox>
+                    </StackPanel>
+                    <StackPanel ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Password</TextBlock>
+                        <TextBox Name="password"></TextBox>
+                    </StackPanel>
+                    <StackPanel ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Admin Password</TextBlock>
+                        <TextBox Name="adminPassword"></TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="0 10 0 0" ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Message of the Day (MotD)</TextBlock>
+                        <TextBox Name="motd" MinLines="3" AcceptsReturn="True"></TextBox>
+                    </StackPanel>
+                    <StackPanel ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Message of the Day Interval (in seconds)</TextBlock>
+                        <Slider Name="motdInterval" Minimum="1" Maximum="120" Value="30" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Administration">
+                <StackPanel Margin="5 10">
+                    <StackPanel  ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Max Players</TextBlock>
+                        <Slider Name="maxPlayers" Minimum="1" Maximum="120" Value="30" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                    <StackPanel  ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Instance ID</TextBlock>
+                        <Slider Name="instanceId" Minimum="1" Maximum="10" Value="1" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                    <StackPanel Margin="0 10 0 0" ToolTip="Server name">
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="enableWhiteList">Enable Whitelist</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="forceSameBuild">Force same build</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="allowFilePatching">Allow file patching</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="multithreadedReplication">Multithreaded replication</CheckBox>
+                    </StackPanel>
+                </StackPanel>
+                <!--
+                instanceId
+                -->
+            </TabItem>
+            <TabItem Header="Gameplay">
+                <StackPanel Margin="5 10">
+                    <StackPanel  ToolTip="Server name">
+                        <TextBlock Style="{StaticResource DiagLabel}">Voice over Network</TextBlock>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="disableVoN">Disable Voice over Network</CheckBox>
+                    </StackPanel>
+                    <StackPanel  ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">VoN Quality</TextBlock>
+                        <Slider Name="vonCodecQuality" Minimum="1" Maximum="100" Value="20" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                    <StackPanel Margin="0 10 0 0" ToolTip="Server name">
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="disable3rdPerson">Disable 3rd Person</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="disableCrosshair">Disable Crosshair</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="lightingConfig">Dark nihgts</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="storeHouseStateDisabled">Disable houses and doors persistence</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="storageAutoFix" IsChecked="True"
+                                  ToolTip="Checks if the persistence files are corrupted and replaces corrupted ones with empty ones">Storage Auto Fix</CheckBox>
+                    </StackPanel>
+                    <StackPanel Margin="0 10 0 0" ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Respawn Time</TextBlock>
+                        <Slider Name="respawnTime" Minimum="1" Maximum="120" Value="0" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                    <StackPanel Margin="0 10 0 0" ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Default Visibility (in meters)</TextBlock>
+                        <Slider Name="defaultVisibility" Minimum="0" Maximum="10000" Value="2000" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                    <StackPanel Margin="0 10 0 0" ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Default Object View Distance (in meters)</TextBlock>
+                        <Slider Name="defaultObjectViewDistance" Minimum="0" Maximum="10000" Value="1000" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Time">
+                <StackPanel Margin="5 10">
+                    <StackPanel ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}"
+                                   ToolTip="Initial in-game time of the server.
+                                   'SystemTime' means the local time of the machine.
+                                   Another possibility is to set the time to some value
+                                   in 'YYYY/MM/DD/HH/MM' format. eg '2015/4/8/17/23'">Server Time</TextBlock>
+                        <TextBox Name="serverTime">SystemTime</TextBox>
+                    </StackPanel>
+                    <StackPanel  ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Time Acceleration</TextBlock>
+                        <Slider Name="serverTimeAcceleration" Minimum="0" Maximum="24" Value="6" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                    <StackPanel  ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Night Time Acceleration</TextBlock>
+                        <Slider Name="serverNightTimeAcceleration" Minimum="0" Maximum="64" Value="4" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                    <CheckBox Style="{StaticResource CheckLabel}" Name="serverTimePersistent">Server Time Persistent</CheckBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Logs and Debbuging">
+                <StackPanel Margin="5 10">
+                    <StackPanel ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}"
+                                   ToolTip="">Log File name</TextBlock>
+                        <TextBox Name="logFile">server_console.log</TextBox>
+                    </StackPanel>
+                    <StackPanel>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="timeStampFormat">Long Timestamp Format</CheckBox>
+                        <CheckBox Style="{StaticResource CheckLabel}" Name="enableDebugMonitor">Enable Debug Monitor</CheckBox>
+                    </StackPanel>
+                    <StackPanel  ToolTip="">
+                        <TextBlock Style="{StaticResource DiagLabel}">Avarage FPS log interval (in seconds)</TextBlock>
+                        <Slider Name="logAverageFps" Minimum="0" Maximum="3600" Value="1200" AutoToolTipPlacement="TopLeft" TickPlacement="Both"></Slider>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Mission">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource DiagLabel}"
+                                   ToolTip="">Log File name</TextBlock>
+                    <ComboBox Name="template" SelectionChanged="template_SelectionChanged">
+                    </ComboBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

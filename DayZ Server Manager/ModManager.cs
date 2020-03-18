@@ -28,6 +28,9 @@ namespace DayZ_Server_Manager
         public class Mod
         {
             public string Path, Name;
+            public int PublishedID;
+            public DateTime Timestamp;
+            public List<string> Meta;
             public Exception Error;
             public Mod(string path)
             {
@@ -36,15 +39,28 @@ namespace DayZ_Server_Manager
 
                 try
                 {
-                    List<string> Meta = File.ReadLines(MetaFile).ToList();
-                    string NameLine = Meta.Find(l => l.StartsWith("name"));
-                    Name = NameLine.Substring(NameLine.LastIndexOf("=") + 3).TrimEnd(new char[] { ';', '"' });
+                    Meta = File.ReadLines(MetaFile).ToList();
+                    Timestamp = File.GetLastWriteTimeUtc(MetaFile);
+                    Name = GetMetaString("name");
+                    PublishedID = GetMetaInt("publishedid");
                 }
                 catch (Exception ex)
                 {
                     Error = ex;
                 }
 
+            }
+
+            private string GetMetaString(string MetaProperty)
+            {
+                string NameLine = Meta.Find(l => l.StartsWith(MetaProperty));
+                return NameLine.Substring(NameLine.LastIndexOf("=") + 3).TrimEnd(new char[] { ';', '"' });
+            }
+            private int GetMetaInt(string MetaProperty)
+            {
+                string NameLine = Meta.Find(l => l.StartsWith(MetaProperty));
+                string inttxt = NameLine.Substring(NameLine.LastIndexOf("=") + 2).TrimEnd(new char[] { ';', '"' });
+                return Int32.Parse(inttxt);
             }
         }
     }

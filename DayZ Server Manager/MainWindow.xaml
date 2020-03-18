@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="370*"/>
+            <RowDefinition Height="49*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -16,6 +20,11 @@
         </StackPanel>
         <StackPanel Name="ClientModsStage" Grid.Column="1">
             <TextBlock>Client Mods</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Style="{StaticResource DiagBtn}">Close</Button>
+            <Button Style="{StaticResource DiagBtn}" Name="ServerCfgBtn" Click="ServerCfgBtn_Click">Server Configuration</Button>
+            <Button Style="{StaticResource DiagBtn}">Run Server</Button>
         </StackPanel>
     </Grid>
 </Window>
